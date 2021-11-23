@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ARApplication</string>
+    <string name="title_activity_maps">MapsActivity</string>
+
+    <string name="btnPlay">Play</string>
+    <string name="btnExit">Exit</string>
+    <string name="btnCam">Camera</string>
+    <string name="btnMap">Map</string>
+    <string name="btnInv">Inventory</string>
+
+
+</resources>
