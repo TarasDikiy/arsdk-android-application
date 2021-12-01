@@ -10,7 +10,6 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     Button btnPlay;
-    Button btnExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,20 +17,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnPlay = (Button) findViewById(R.id.btnPlay);
-        btnExit = (Button) findViewById(R.id.btnExit);
         //Кнопка играть
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(intent);
-            }
-        });
-        //Кнопка выйти
-        btnExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
     }
