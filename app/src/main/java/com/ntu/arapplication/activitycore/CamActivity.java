@@ -1,4 +1,4 @@
-package com.example.arapplication;
+package com.ntu.arapplication.activitycore;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+
+import com.example.arapplication.R;
 
 public class CamActivity extends AppCompatActivity {
 

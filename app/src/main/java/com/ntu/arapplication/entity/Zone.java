@@ -1,4 +1,4 @@
-package com.example.arapplication;
+package com.ntu.arapplication.entity;
 
 public class Zone {
     private String title;

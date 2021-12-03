@@ -1,4 +1,4 @@
-package com.example.arapplication;
+package com.ntu.arapplication.dbmanager;
 
 
 import com.mongodb.ConnectionString;

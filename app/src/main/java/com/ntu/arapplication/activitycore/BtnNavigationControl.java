@@ -1,4 +1,4 @@
-package com.example.arapplication;
+package com.ntu.arapplication.activitycore;
 
 import android.widget.Button;
 

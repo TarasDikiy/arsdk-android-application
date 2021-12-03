@@ -26,10 +26,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ARApplication">
         <activity
-            android:name=".CamActivity"
+            android:name="com.ntu.arapplication.activitycore.CamActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.ntu.arapplication.activitycore.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,7 +50,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name="com.ntu.arapplication.activitycore.MapsActivity"
             android:exported="false"
             android:label="@string/title_activity_maps"/>
     </application>

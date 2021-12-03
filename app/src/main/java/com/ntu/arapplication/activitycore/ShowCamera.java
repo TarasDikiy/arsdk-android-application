@@ -1,4 +1,4 @@
-package com.example.arapplication;
+package com.ntu.arapplication.activitycore;
 
 import android.content.Context;
 import android.content.res.Configuration;
