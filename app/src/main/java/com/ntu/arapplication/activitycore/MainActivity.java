@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import com.example.arapplication.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +18,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnPlay = (Button) findViewById(R.id.btnPlay);
+
+        Permissions permissions = new Permissions();
+        permissions.camPermissions(this, this);
+        permissions.locationPermission(this, this);
+
         //Кнопка играть
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override

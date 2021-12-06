@@ -1,8 +1,13 @@
 package com.ntu.arapplication.activitycore;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +28,7 @@ public class CamActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cam);
+
         //Инициализация фрейма камеры
         cameraView = findViewById(R.id.frmlayout_camera_view);
 
@@ -31,10 +37,13 @@ public class CamActivity extends AppCompatActivity {
         btnMap = (Button) findViewById(R.id.btnMap_camlayout);
         btnInv = (Button) findViewById(R.id.btnInv_camlayout);
 
+
+
         //Запуск камеры
         camera = Camera.open();
         showCamera = new ShowCamera(this, camera);
         cameraView.addView(showCamera);
+
 
         //Обозначаем имя активити
         currentActivityName = CamActivity.class.getSimpleName();

@@ -2,6 +2,13 @@ plugins {
     id 'com.android.application'
 }
 
+apply plugin: 'realm-android'
+
+
+realm {
+    syncEnabled = true
+}
+
 android {
     compileSdk 31
 
@@ -41,4 +48,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:18.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'org.mongodb:mongodb-driver:3.12.10'
+
 }
