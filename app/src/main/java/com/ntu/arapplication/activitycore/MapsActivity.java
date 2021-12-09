@@ -20,9 +20,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.example.arapplication.databinding.ActivityMapsBinding;
+import com.google.gson.Gson;
+import com.ntu.arapplication.dbmanager.DataModel;
 
 import org.bson.Document;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import io.realm.Realm;
@@ -49,6 +53,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     MongoDatabase mongoDatabase;
     MongoCollection<Document> mongoCollection;
 
+    ArrayList<Double> latitude = new ArrayList<Double>();
+    ArrayList<Double> longitude = new ArrayList<Double>();
+    ArrayList<Integer> radius = new ArrayList<Integer>();
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,46 +80,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-        Realm.init(this);
-        App app = new App(new AppConfiguration.Builder(Appid)
-                .build());
-        Credentials credentials = Credentials.anonymous();
-        app.loginAsync(credentials, result -> {
-            if (result.isSuccess()) {
-                Log.v("QUICKSTART", "Successfully authenticated anonymously.");
-                User user = app.currentUser();
-                mongoClient = user.getMongoClient("mongodb-atlas");
-                mongoDatabase = mongoClient.getDatabase("arsdk");
-                mongoCollection = mongoDatabase.getCollection("sdks");
-
-                /*mongoCollection.count().getAsync(task -> {
-                    if (task.isSuccess()) {
-                        long count = task.get();
-                        Log.v("EXAMPLE","successfully counted, number of documents in the collection: " + count);
-                    } else {
-                        Log.e("EXAMPLE", "failed to count documents with: ", task.getError());
-                    }
-                });*/
-
-                Document queryFilter  = new Document("index", "z");
-                RealmResultTask<MongoCursor<Document>> findTask = mongoCollection.find(queryFilter).iterator();
-                findTask.getAsync(task -> {
-                    if (task.isSuccess()) {
-                        MongoCursor<Document> results = task.get();
-                        Log.v("EXAMPLE", "successfully found all zones:");
-                        while (results.hasNext()) {
-                            Log.v("EXAMPLE", results.next().toString());
-                        }
-                    } else {
-                        Log.e("EXAMPLE", "failed to find documents with: ", task.getError());
-                    }
-                });
-
-                // interact with realm using your user object here
-            } else {
-                Log.e("QUICKSTART", "Failed to log in. Error: " + result.getError());
-            }
-        });
+        Bundle arguments = getIntent().getExtras();
+        latitude = (ArrayList<Double>) arguments.get("latitude");
+        longitude = (ArrayList<Double>) arguments.get("longitude");
+        radius = (ArrayList<Integer>) arguments.get("radius");
 
         //Обозначение кнопок
         btnMap = (Button) findViewById(R.id.btnMap);
@@ -183,14 +157,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.setMyLocationEnabled(true);
 
-        //TODO Неправильно отображаются цвета зон!
         int color = R.color.defaultCircle;
-        CircleOptions circleOptions = new CircleOptions()
+
+        if (latitude.isEmpty() && longitude.isEmpty() && radius.isEmpty()) {
+            Log.v("MAP", "LIST'S IS EMPTY");
+        } else {
+            for (int i = 0; i < latitude.size(); i++) {
+                Log.v("MAP", latitude.get(i).toString());
+                Log.v("MAP", longitude.get(i).toString());
+                Log.v("MAP", radius.get(i).toString());
+
+                CircleOptions circleOptions = new CircleOptions()
+                    .center(new LatLng(latitude.get(i), longitude.get(i))).radius(radius.get(i))
+                    .fillColor(color)
+                    .strokeColor(R.color.defaultCircleStroke)
+                    .strokeWidth(2);
+                mMap.addCircle(circleOptions);
+            }
+        }
+
+
+
+        /*CircleOptions circleOptions = new CircleOptions()
                 .center(new LatLng(50.450150397043096, 30.62600433826447)).radius(50)
                 .fillColor(color)
                 .strokeColor(R.color.defaultCircleStroke)
                 .strokeWidth(2);
-        mMap.addCircle(circleOptions);
+        mMap.addCircle(circleOptions);*/
+
+
 
     }
 
